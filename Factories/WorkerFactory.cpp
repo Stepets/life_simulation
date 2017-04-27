@@ -1,12 +1,15 @@
 #include "WorkerFactory.h"
-#include "../SimulationData.h"
-#include "../Workers/AIWorker.h"
-#include "../Workers/CreatureActionWorker.h"
-#include "../Workers/CreatureSpawnWorker.h"
-#include "../Workers/CreatureRemoveWorker.h"
-#include "../Workers/ResourceWorker.h"
-#include "../Workers/VisualWorker.h"
-#include "../Workers/WaiterWorker.h"
+#include <SimulationData.h>
+#include <AIWorker.h>
+#include <CreatureActionWorker.h>
+#include <CreatureSpawnWorker.h>
+#include <CreatureRemoveWorker.h>
+#include <ResourceWorker.h>
+#include <WaiterWorker.h>
+
+#ifndef HEADLESS
+	#include <VisualWorker.h>
+#endif
 
 
 void WorkerFactory::build ( std::vector<WorldWorker*>&workers ) {
@@ -15,7 +18,9 @@ void WorkerFactory::build ( std::vector<WorldWorker*>&workers ) {
     addWorker <CreatureSpawnWorker> ( workers,SimulationData::getInst()->useCreatureSpawnWorker );
     addWorker <CreatureRemoveWorker> ( workers,SimulationData::getInst()->useCreatureRemoveWorker );
     addWorker<ResourceWorker> ( workers,SimulationData::getInst()->useResourceWorker );
+	#ifndef HEADLESS
     addWorker<VisualWorker> ( workers, SimulationData::getInst()->useVisualWorker );
+	#endif
     addWorker <WaiterWorker> ( workers,SimulationData::getInst()->useWaiterWorker );
 
 

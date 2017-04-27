@@ -1,6 +1,5 @@
 #include "CreatureBuilder.h"
 #include "GenomeBuilder.h"
-#include "../Genetics/GenomeVisualizer.h"
 #include "PhenotypeBuilder.h"
 #include <iostream>
 
@@ -19,8 +18,6 @@ Creature *CreatureBuilder::build ( int posX, int posY ) {
     
     result->setGenome ( genome );
     result->setPhenotype(phenotype);
-    cv::Mat vis = GenomeVisualizer::visualize ( genome );
-    cv::imwrite ( "genomes/" + std::to_string ( nextId ) + ".png", vis );
 
     return result;
     }
@@ -36,8 +33,6 @@ Creature* CreatureBuilder::build ( Creature& parentCreature ) {
     
     result->setGenome ( genome );
     result->setPhenotype(phenotype);
-    cv::Mat vis = GenomeVisualizer::visualize ( genome );
-    cv::imwrite ( "genomes/" + std::to_string ( nextId ) + ".png", vis );
 
     return result;
 
